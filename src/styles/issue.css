@@ -1,0 +1,65 @@
+.issueTitle {
+    background: #f6f8fa; 
+    margin-top: 10px; 
+    width: 100%; 
+    border-radius: 5px; 
+    height: 40px; 
+    font-size: 18px; 
+    border: 1px solid #d0d7de;
+}
+
+.labelName{
+    background: #f6f8fa; 
+    margin-top: 10px; 
+    width: 100%; 
+    border-radius: 5px; 
+    height: 40px; 
+    font-size: 18px; 
+    border: 1px solid #d0d7de;
+    float: left;
+    margin-right: 20px;
+}
+.labelDescription{
+    background: #f6f8fa; 
+    margin-top: 10px; 
+    width: 100%; 
+    border-radius: 5px; 
+    height: 40px; 
+    font-size: 18px; 
+    border: 1px solid #d0d7de;
+    margin-left: 20px;
+    margin-right: 40px;
+    /* float: left; */
+}
+
+.newIssue {
+    border: 1px solid #d0d7de; 
+    border-radius: 5px; 
+    display: flex; 
+    flex-direction: column;
+}
+.newLabel{
+    border: 1px solid #d0d7de; 
+    border-radius: 5px; 
+}
+
+.btnSubmit {
+    background-color: #2da44e !important; 
+    margin-left: auto !important;  
+    margin-bottom: 10px;
+}
+
+.btnlabelsubmit{
+    background-color: #2da44e !important; 
+    right: 80%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.EasyMDEContainer {
+    margin-top: 20px;
+}
+
+.CodeMirror {
+    background-color: #f6f8fa !important;
+}

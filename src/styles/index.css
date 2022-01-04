@@ -1,0 +1,188 @@
+.nav { 
+    font-weight: 600; 
+    padding: unset !important;
+}
+
+.container{
+    padding: 12px 24px;
+}
+
+.navSearch {
+    background-color: #24292f !important; 
+    border: 1px solid #57606a !important;  
+    color: #fff;
+}
+
+.projTitle {
+    color:#0969da; 
+    font-weight: bold; 
+    font-size: 20px;
+}
+
+.tabs {
+    margin-top: 35px;
+    margin-left: 5% !important;
+    width: fit-content; 
+    border-bottom: 3px solid #fd8c73;
+}
+
+.issueTab {
+    display: flex; 
+    align-items: baseline; 
+    gap: 0.4rem;
+    font-weight: 600;
+}
+
+.subDiv {
+    margin: auto; 
+    margin-top: 10px; 
+    justify-content: space-between; 
+    align-items: baseline;
+    width: 100%;
+    float: left;
+}
+
+.filterSearch {
+    width: 930px; 
+    height: 40px; 
+    background-color: #f6f8fa; 
+    border: 1px solid #d0d7de; border-radius: 5px;
+}
+
+.filterBtns, .btnMilestone {
+    border: 1px solid #d0d7de !important; 
+    border-radius: 5px 0 0 5px !important;
+}
+
+.btnMilestone {
+    border-radius: 0 5px 5px 0 !important;
+}
+
+.icons {
+    margin-right: 5px;
+}
+
+.issueBtn {
+    background-color: #2da44e !important; 
+    padding: 6px 16px !important;
+}
+
+.boxHead {
+    padding: 15px; 
+    border-radius: 10px 10px 0 0; 
+    background-color: #f6f8fa;  
+    border: 1px solid #d0d7de; 
+    font-weight: bold; 
+    display: flex; 
+    justify-content: space-between;
+}
+
+.boxBody {
+    text-align: center; 
+    height: 300px; 
+    border: 1px solid #d0d7de; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border-radius: 0 0 5px 5px;
+}
+
+.logo{
+    width: 35px;
+}
+#example-search-input{
+    background-color: white;
+}
+.nav-link{
+    color: white;
+}
+.toolbar{
+    background-color: #f6f8fa;
+}
+.line{
+    margin-top: 0px;
+}
+
+.newIssue{
+    right: 20%;
+    width: 100px;
+    height: 50px;
+
+}
+.home{
+    margin: auto; 
+    margin-top: 20px;
+}
+.boxHeadContainer{
+    display: flex;
+     align-items: center;
+}
+
+.checkBox{
+    margin-right: 15px;
+}
+.boxHeadContainer2{
+    display: flex;
+}
+
+.dropdownMenuButton{
+background: none; border: none; color: grey;
+}
+
+.dropdown{
+    margin: auto;
+    margin-right: 20px;
+}
+.containerLabel{
+    margin-top: 30px;
+}
+.table{
+    background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 5px; 
+    border-collapse: separate;
+}
+
+.head{
+    padding: 1rem;
+}
+
+.headName{
+    border-bottom: 1px solid #d0d7de
+}
+
+.tbody{
+    background: #fff;
+}
+
+.labelName{
+    background:black; color: #57606a; padding: 2px 12px; border-radius: 10px; font-size: 14px;
+}
+.labelDesc{
+    color: #57606a; font-size: 14px;
+}
+
+.postLabel{
+    display: flex;
+}
+.newLabelName{
+    background: #f6f8fa; 
+    margin-top: 10px; 
+    width: 100%; 
+    border-radius: 5px; 
+    height: 40px; 
+    font-size: 18px; 
+    border: 1px solid #d0d7de;
+    float: left;
+    margin-right: 20px;
+    width:250px
+}
+.newLabelDesc{
+    background: #f6f8fa; 
+    margin-top: 10px; 
+    width: 100%; 
+    border-radius: 5px; 
+    height: 40px; 
+    font-size: 18px; 
+    border: 1px solid #d0d7de;
+    margin-left: 20px;
+    margin-right: 40px;
+}
