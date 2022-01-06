@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/index.css'
 import '../styles/issue.css';
+import Header from '../components/Header'
 import Toolbar from '../components/Toolbar';
 
 
@@ -8,23 +9,25 @@ import Toolbar from '../components/Toolbar';
 function Home() {
     return (
      <div>
-      <div className='col-sm-11 subDiv'>
-                    <a href='/Labels' className='p-2 btn btn-light filterBtns'>
-                    <i className='fas fa-tag icons'>
-                    Lables 0
-                    </i>
-                    <button className='p-2 btn btn-light btnMilestone '>
-                    MileStones
-                    </button>
-                    </a>
-        </div>
-        <div className= 'newIssue'>
-                    <a href='/New' className='btn btn-success issueBtn'>
-                    New Issue
-                    </a>
+           <Header />
+      <Toolbar />
+                <div className='col-sm-11 subDiv'>
+                    <div>
+                        <input type='text' placeholder='Search' className='filterSearch'/>
+                    </div>
+                    <div>
+                        <div>
+                            <a href='/labels' className='p-2 btn btn-light filterBtns'>
+                            <i className='fas fa-tag icons'></i>Labels 0
+                            </a>
+                            <button className='p-2 btn btn-light btnMilestone'>Milestones 0</button>
+                        </div>
+                    </div>
+                    <div>
+                        <a className='btn btn-success issueBtn' href="/new">New Issue</a>
+                    </div>
                 </div>
 
-        <br/>
         <br/>
         <div className='col-sm-11 home'>
         <div className='boxHead'>

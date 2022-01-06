@@ -1,11 +1,15 @@
 import React from 'react';
 import '../styles/index.css'
-import '../styles/issue.css'
+import '../styles/issue.css';
+import Header from '../components/Header'
+import Toolbar from '../components/Toolbar';
 
 // navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
 function Labels() {
     return (
         <div>
+             <Header />
+      <Toolbar />
             <div className='col-sm-11 subDiv'>
                 <a href='/Labels' className='p-2 btn btn-light filterBtns'>
                     <i className='fas fa-tag icons'>
@@ -17,7 +21,7 @@ function Labels() {
                 </a>
             </div>
             <div className='newIssue'>
-                <a href='/NewLabel' className='btn btn-success issueBtn'>
+                <a href='/new_label' className='btn btn-success issueBtn'>
                     add new label
                 </a>
             </div>

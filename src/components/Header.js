@@ -19,6 +19,11 @@ function Header() {
                     <a class='nav-link' href='#'>Explore</a>
                     </div>
                 </div>
+                <div>
+                    <a href='/login' className='logInLink'>
+                        Login
+                    </a>
+                </div>
             </div>
         </nav>
     )
