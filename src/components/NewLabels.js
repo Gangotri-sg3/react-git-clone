@@ -3,64 +3,84 @@ import '../styles/index.css'
 import '../styles/issue.css';
 import Header from '../components/Header'
 import Toolbar from '../components/Toolbar';
+import  { useEffect, useState } from "react";
+import e from 'cors';
+import axios from 'axios';
+import {useNavigate} from 'react-router';
 
-// navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
-class NewLabel extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {value: ''};
-        console.log("states ::::",this.state)
+const NewLabel = () => {
+    const [label_name, setLabel_name] = useState("");
+    const [description, setDescription] = useState("");
+    const [color, setColor] = useState("");
+    let [labels,setLabels] = useState([]);
+    const navigate = useNavigate();
     
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
+    useEffect(() => {
+        axios.get('http://localhost:4000/all_labels/')
+            .then((response) => { 
+                console.log("getting labels")
+                setLabels(response.data)
+            }).catch((err) => {
+                console.log("erro in getting labels")
+            })
+    }, []);
     
-      handleChange(event) {
-          console.log("even in handle change :",event)
-        this.setState({value: event.target.value});
-      }
+    const submitHandler = async(e) => {
+        e.preventDefault();
+        console.log("name :",label_name,"description :",description,"color :",color)
+        try{
+            const { data } = await axios.post('http://localhost:4000/labels/',{label_name,description,color});
+            navigate("/labels");
+        }catch (error){
+            console.log("error in sign up : ",error);
+            navigate("/login");
+        }
+    }
     
-      handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.preventDefault();
-      }
-    
-    render() { 
     return (
         <div>
              <Header />
       <Toolbar />
-            <div className='col-sm-11 subDiv'>
-                <a href='/Labels' className='p-2 btn btn-light filterBtns'>
-                    <i className='fas fa-tag icons'>
-                        Lables 0
-                    </i>
-                    <button className='p-2 btn btn-light btnMilestone '>
-                        MileStones
-                    </button>
-                </a>
+            <form className='postLabel' onSubmit={submitHandler}>
+                            <input type='text' placeholder='Label Name' name='label_name' className='newLabelName' value={label_name} onChange={(e) => setLabel_name(e.target.value)}/>
+                            <input type='text' placeholder='description' name='description' className='newLabelDesc' value={description} onChange={(e) => setDescription(e.target.value)}/>
+                            <input type='text' placeholder='color' name='color' className='newLabelDesc' value={color} onChange={(e) => setColor(e.target.value)}/>
+                            <button type='submit' className='btn btn btn-success btnlabelsubmit' id='newLabelButton' >Add label</button>
+                        </form>
+            <br/>
+            <div className='containerLabel'>
+                <table className='table' >
+                    <thead className='head'>
+                        <tr className='headName'>
+                            <td style={{border: "none"}}>
+                                <b>labels</b>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody className='tbody'>
+                    {labels.map((label) => {
+                        return (
+                            <tr>
+                            <td>
+                                <a style={{background:`${label.color}`}} className='labelNameTable'>
+                                    {label.label_name}
+                                </a>
+                            </td>
+                            <td>
+                                <a className='labelDescTable'>
+                                    {label.description}
+                                </a>
+                            </td>
+                        </tr>
+                        )
+                    })}
+                        
+                        
+                    </tbody>
+                </table>
             </div>
-            <div className='newIssue'>
-                <a href='/new_label' className='btn btn-success issueBtn'>
-                    add new label
-                </a>
-            </div>
-            <br />
-            <form className='postLabel' onSubmit='this.handleSubmit'>
-                <div className='col-sm-1'>
-                    <div className='col-sm-9 newLabel'>
-                        <input type='text' placeholder='Label Name' name='label_name' className='newLabelName' value={this.state.value} onChange={this.handleChange} />
-                        <input type='text' placeholder='description' name='description' className='newLabelDesc' value={this.state.value} onChange={this.handleChange} />
-                        <input type='text' placeholder='color' name='color' className='newLabelDesc' value={this.state.value} onChange={this.handleChange}/>
-                        <input className='btn btn-success btnlabelsubmit' type="submit" value="Create a label" />
-
-                    </div>
-                </div>
-            </form>
         </div>
     )
-}
 }
 
 export default NewLabel;

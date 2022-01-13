@@ -21,9 +21,9 @@ function Toolbar() {
                 <div className='row tabs'>
                     <div className='col-sm issueTab'>
                         <i className='far fa-scrubber'> </i>
-                        <p>
+                        <a href='/' style={{color:'black'}}>
                             Issues
-                        </p>
+                        </a>
                     </div>
                     <div className='col-sm issueTab'>
                         <i className='far fa-scrubber'> </i>

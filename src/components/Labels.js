@@ -3,51 +3,71 @@ import '../styles/index.css'
 import '../styles/issue.css';
 import Header from '../components/Header'
 import Toolbar from '../components/Toolbar';
+import  { useEffect, useState } from "react";
+import e from 'cors';
+import axios from 'axios';
+import {useNavigate} from 'react-router';
 
-// navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
-function Labels() {
+
+const Labels = () => {
+    let [labels,setLabels] = useState([]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        axios.get('http://localhost:4000/all_labels/')
+            .then((response) => { 
+                console.log("getting labels",response.data)
+                setLabels(response.data)
+                console.log("labels :::::::::::::::",labels)
+            }).catch((err) => {
+                console.log("erro in getting labels")
+            })
+    }, []);
+    
+
     return (
         <div>
              <Header />
       <Toolbar />
-            <div className='col-sm-11 subDiv'>
-                <a href='/Labels' className='p-2 btn btn-light filterBtns'>
-                    <i className='fas fa-tag icons'>
-                        Lables 0
-                    </i>
-                    <button className='p-2 btn btn-light btnMilestone '>
-                        MileStones
-                    </button>
-                </a>
-            </div>
-            <div className='newIssue'>
-                <a href='/new_label' className='btn btn-success issueBtn'>
-                    add new label
-                </a>
-            </div>
+      <div className='col-sm-11 subDiv'>
+                    <div>
+                        <div>
+                            <a href='/labels' className='p-2 btn btn-light filterBtns'>
+                            <i className='fas fa-tag icons'></i>Labels 0
+                            </a>
+                            <button className='p-2 btn btn-light btnMilestone'>Milestones 0</button>
+                        </div>
+                    </div>
+                    <div>
+                        <a className='btn btn-success issueBtn' href="/new_label">add label</a>
+                    </div>
+                </div>
             <br />
             <div className='containerLabel'>
                 <table className='table' >
                     <thead className='head'>
                         <tr className='headName'>
-                            <td>
+                            <td style={{border: "none"}}>
                                 <b>labels</b>
                             </td>
                         </tr>
                     </thead>
                     <tbody className='tbody'>
-                        <tr>
+                    {labels.map((label) => {
+                        return (
+                            <tr>
                             <td>
-                                <a className='labelName'>
-                                    labelName
+                                <a style={{background:`${label.color}`}} className='labelNameTable'>
+                                    {label.label_name}
                                 </a>
                             </td>
                             <td>
-                                <a className='labelDesc'>
-                                    labelDesc
+                                <a className='labelDescTable'>
+                                    {label.description}
                                 </a>
                             </td>
                         </tr>
+                        )
+                    })}
                     </tbody>
                 </table>
             </div>

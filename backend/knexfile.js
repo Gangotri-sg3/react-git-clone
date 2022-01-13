@@ -5,8 +5,7 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      // host: 'postgres://localhost/test',
-      database: 'react_git',
+      database: 'react_database',
       user:     'postgres',
       password: 'password'
     },

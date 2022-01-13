@@ -5,8 +5,7 @@ exports.up = function(knex) {
        table.string('label_name', 255).notNullable();
        table.string('description', 255);
        table.string('color', 255);
-
-
+       table.string('font_color', 255);
     })
 };
 

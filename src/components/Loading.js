@@ -1,10 +1,22 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap'
 
-const Loading = () => {
+const Loading = ({size = 100 }) => {
     return (
-      <div >
-
+      <div  style={{
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        width:'100%',
+        height:'100%'
+      }}>
+        <Spinner
+        style={{
+        width:size,
+        height:size}}
+        animation='border'
+        />
       </div>
     )
 }

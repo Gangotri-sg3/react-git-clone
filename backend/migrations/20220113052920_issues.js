@@ -4,7 +4,8 @@ exports.up = function(knex) {
         table.increments('id').primary();
        table.string('title', 255).notNullable();
        table.string('description', 255).notNullable();
-       table.string('creator_id', 255);
+       table.string('creator', 255);
+       table.string('creator_img', 255);
        table.string('comments', 255);
        table.integer('assignee_id' );
        table.integer('lable_id');

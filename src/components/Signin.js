@@ -5,42 +5,45 @@ import  { useEffect, useState } from "react";
 import e from 'cors';
 import ErrorMessage from './ErrorMessage';
 import axios from 'axios';
+import Loading from './Loading';
+import {useNavigate} from 'react-router';
 
-// navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
 const Signin = () =>  {
-    // constructor(props){
-    //     super(props)
-    // }
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [profile, setProfile] = useState("");
     const [error, setError] = useState("false");
     const [message, setMessage] = useState("null");
     const [loading, setLoading] = useState("false");
+    const navigate = useNavigate();
 
     const submitHandler = async(e) => {
         e.preventDefault();
-        console.log("email :",email,"password :",password,"name :",name,'username :',username)
-        setMessage(null);
+        console.log("profile before :::",profile)
+        console.log("email :",email,"profile",profile,"password :",password,"name :",name,'username :',username)
         try{
-            const config = {
-                headers: {
-                    "Content-type" : "application/json",
-
-                }
-            };
-            setLoading(true);
-            const { data } = await axios.post('http://localhost:4000/signup/',{name,email,password,username},config);
-            setLoading(false);
-            localStorage.setItem('userInfo',JSON.stringify(data));
+            const formData = new FormData();
+            formData.append(
+                "myFile",
+                profile,
+                email,
+                password,name,username
+              );
+            const { data } = await axios.post('http://localhost:4000/signup/',{email,profile,password,name,username});
+            console.log("login")
+            navigate("/login");
 
         }catch (error){
             console.log("error in sign up : ",error);
-            setError("error.response")
+            navigate("/signup");
+
         }
     }
-
+   const onFileChange = event => {
+        setProfile(event.target.files[0])
+      };
     // render() { 
     return (
         <div>
@@ -53,9 +56,6 @@ const Signin = () =>  {
                 <div className='card-body'>
                     <div className='login-box'>
                         <div className='header'>
-                            {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
-                            {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
-                      {loading && <Loading/>}
                         <form className='form' onSubmit={submitHandler}>
                             <div className='form-group'>
                                 <label htmlFor='name' >Full Name</label>
@@ -70,6 +70,10 @@ const Signin = () =>  {
                             <div className='form-group'>
                                 <label htmlFor='email' >E-mail</label>
                                 <input type='email' name='email' placeholder='E-mail' className='form-control' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='Profile' >User Profile</label>
+                                <input type="file" onChange={onFileChange} />
                             </div>
                             <br/>
                             <div className='form-group'>

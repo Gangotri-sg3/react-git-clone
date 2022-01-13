@@ -1,9 +1,14 @@
 import React from 'react';
 import '../styles/index.css'
 import '../styles/issue.css';
-import  { useEffect, useState } from "react";
 import e from 'cors';
 import axios from 'axios';
+import Loading from './Loading';
+import ErrorMessage from './ErrorMessage';
+import {useNavigate} from 'react-router';
+import { useEffect, useState } from "react";
+
+
 
 
 // navbar.navbar-expand-lg.navbar-dark.bg-dark.nav
@@ -13,25 +18,49 @@ const Login = () => {
     const [error, setError] = useState("false");
     const [message, setMessage] = useState("null");
     const [loading, setLoading] = useState("false");
+        let [users, setUsers] = useState([]);
+        let [logInStatus, setLoginStatus] = useState(false);
 
-    const submitHandler = async() => {
-        console.log("email :",email,"password :",password)
+
+    const navigate = useNavigate();
+
+
+   
+
+    const submitHandler = async (e) => {
         e.preventDefault();
-        try{ 
-            const config = {
-                headers: {
-                    'Content-type':'application/json'
-                }
-            }
-            setLoading(true);
-            const { data } = await axios.post('http://localhost:4000/login/',{email,password},config);
-            setLoading(false);
-            console.log("data ::",data)
-            localStorage.setItem('userInfo',JSON.stringify(data))
-        }catch (err){
-            console.log("err in login :",err);
-            setError("error in log in")
-        }
+        console.log("email :", email, "password :", password)
+        // try{
+             axios.post('http://localhost:4000/login/',{email,password}).then((res) =>{
+                 if(!res.data.auth){
+                    console.log("res.data message",res.data.message)
+                     setLoginStatus(false);
+            navigate("/login");
+
+                 }else{
+                     console.log("res.data",res.data)
+                     console.log("res.data username",res.data.result[0].name)
+                     setLoginStatus(true);
+                     localStorage.setItem('token',res.data.token)
+                     navigate("/");
+
+                 }
+             }).catch((err) => {
+                console.log("err",err)
+                navigate("/login");
+                setLoginStatus(false);
+
+             })
+    }
+
+    const isAuthenticated = () => {
+        axios.get('http://localhost:4000/login/is_user_auth',{
+            headers:{
+                'x-access-token':localStorage.getItem('token')
+            },
+        }).then((res) => {
+            console.log("authenticated",res)
+        })
     }
     
     return (
@@ -45,6 +74,9 @@ const Login = () => {
                 <div className='card-body'>
                     <div className='login-box'>
                         <div className='header'>
+                            {/* {error && <ErrorMessage variant='danger'/>} */}
+
+                            {!loading && <Loading/>}
                         <form className='form' onSubmit={submitHandler}>
                             <div className='form-group'>
                                 <label htmlFor='email' >E-mail</label>
@@ -68,6 +100,11 @@ const Login = () => {
                     <h6>New to Github?
                         <a href="/signin">Create an account</a>
                     </h6>
+                    {users.map((user) => {
+                                return (
+                                    <img src={user.profile} alt="BigCo Inc. logo"/>
+                                )
+                            })}
                 </div>
             </div>
         </div>
